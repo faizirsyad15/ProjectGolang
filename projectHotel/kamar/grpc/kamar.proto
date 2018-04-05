@@ -1,0 +1,30 @@
+syntax="proto3";
+
+import "google/protobuf/empty.proto"; //digunakan jika tdk menggunakan parameter
+
+package grpc;
+
+message AddKamarReq{
+    string idKamar=1;
+    string idTipeKamar=2;
+    string idMenu=3;
+    string status=4;
+}
+
+
+message ReadKamarResp{
+    repeated AddKamarReq allKamar=5;
+}
+
+message UpdateKamarReq{
+    string idKamar=1;
+    string idTipeKamar=2;
+    string idMenu=3;
+    string status=4;
+}
+
+service KamarService{
+    rpc AddKamar(AddKamarReq) returns (google.protobuf.Empty) {};
+    rpc ReadKamar(google.protobuf.Empty) returns (ReadKamarResp){};
+    rpc UpdateKamar(UpdateKamarReq) returns (google.protobuf.Empty){};
+   }

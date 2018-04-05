@@ -1,0 +1,39 @@
+syntax="proto3";
+
+import "google/protobuf/empty.proto"; //digunakan jika tdk menggunakan parameter
+
+package grpc;
+
+message AddGolonganReq{
+    string idGolongan=1;
+    string namaGolongan=2;
+    string status=3;
+}
+
+message ReadGolonganByNamaReq{
+    string namaGolongan=1;
+}
+
+message ReadGolonganByNamaResp{
+    string idGolongan=1;
+    string namaGolongan=2;
+    string status=3;
+}
+
+
+message ReadGolonganResp{
+    repeated ReadGolonganByNamaResp allGolongan=1;
+}
+
+message UpdateGolonganReq{
+    string idGolongan=1;
+    string namaGolongan=2;
+    string status=3;
+}
+
+service GolonganService{
+    rpc AddGolongan(AddGolonganReq) returns (google.protobuf.Empty) {};
+    rpc ReadGolongan(google.protobuf.Empty) returns (ReadGolonganResp){};
+    rpc UpdateGolongan(UpdateGolonganReq) returns (google.protobuf.Empty){};
+    rpc ReadGolonganByNama(ReadGolonganByNamaReq) returns (ReadGolonganByNamaResp){};
+}

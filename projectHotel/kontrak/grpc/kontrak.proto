@@ -1,0 +1,58 @@
+syntax="proto3";
+
+import "google/protobuf/empty.proto"; //digunakan jika tdk menggunakan parameter
+
+package grpc;
+
+message AddKontrakReq{
+    string idKontrak=1;
+    string tanggalMulai=2;
+    string tanggalSelesai=3;
+    string keterangan=4;
+    string status=5;
+}
+
+message ReadKontrakBySelesaiReq{
+    string tanggalSelesai=1;
+}
+
+message ReadKontrakBySelesaiResp{
+    string idKontrak=1;
+    string tanggalMulai=2;
+    string tanggalSelesai=3;
+    string keterangan=4;
+    string status=5;
+}
+
+
+message ReadKontrakResp{
+    repeated ReadKontrakBySelesaiResp allKontrak=1;
+}
+
+message UpdateKontrakReq{
+    string idKontrak=1;
+    string tanggalMulai=2;
+    string tanggalSelesai=3;
+    string keterangan=4;
+    string status=5;
+}
+
+message ReadKontrakByMulaiReq{
+    string tanggalMulai=1;
+}
+
+message ReadKontrakByMulaiResp{
+    string idKontrak=1;
+    string tanggalMulai=2;
+    string tanggalSelesai=3;
+    string keterangan=4;
+    string status=5;
+}
+
+service KontrakService{
+    rpc AddKontrak(AddKontrakReq) returns (google.protobuf.Empty) {};
+    rpc ReadKontrakBySelesai(ReadKontrakBySelesaiReq) returns (ReadKontrakBySelesaiResp) {};
+    rpc ReadKontrak(google.protobuf.Empty) returns (ReadKontrakResp){};
+    rpc UpdateKontrak(UpdateKontrakReq) returns (google.protobuf.Empty){};
+    rpc ReadKontrakByMulai(ReadKontrakByMulaiReq) returns (ReadKontrakByMulaiResp){};
+}

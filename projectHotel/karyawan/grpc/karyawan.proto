@@ -1,0 +1,85 @@
+syntax="proto3";
+
+import "google/protobuf/empty.proto"; //digunakan jika tdk menggunakan parameter
+
+package grpc;
+
+message AddKaryawanReq{
+    string idKaryawan=1;
+    string namaKaryawan=2;
+    string alamat=3;
+    string noTelepon=4;
+    string keterangan=5;
+    string idJabatan=6;
+    string idDepartemen=7;
+    string idGolongan=8;
+    string idKontrak=9;
+    string status=10;
+}
+
+message ReadKaryawanByTeleponReq{
+    string noTelepon=1;
+}
+
+message ReadKaryawanByTeleponResp{
+    string idKaryawan=1;
+    string namaKaryawan=2;
+    string alamat=3;
+    string noTelepon=4;
+    string keterangan=5;
+    string idJabatan=6;
+    string idDepartemen=7;
+    string idGolongan=8;
+    string idKontrak=9;
+    string status=10;
+}
+message ReadKaryawanResp{
+    repeated ReadKaryawanByTeleponResp allKaryawan=1;
+}
+
+message UpdateKaryawanReq{
+    string idKaryawan=1;
+    string namaKaryawan=2;
+    string alamat=3;
+    string noTelepon=4;
+    string keterangan=5;
+    string idJabatan=6;
+    string idDepartemen=7;
+    string idGolongan=8;
+    string idKontrak=9;
+    string status=10;
+}
+
+message ReadKaryawanByNamaReq{
+    string namaKaryawan=1;
+}
+
+message ReadKaryawanByNamaResp{
+    string idKaryawan=1;
+    string namaKaryawan=2;
+    string alamat=3;
+    string noTelepon=4;
+    string keterangan=5;
+    string idJabatan=6;
+    string idDepartemen=7;
+    string idGolongan=8;
+    string idKontrak=9;
+    string status=10;
+}
+
+message ReadKaryawanByKeteranganReq{
+    string Keterangan=1;
+}
+
+message ReadKaryawanByKeteranganResp{
+    repeated ReadKaryawanByNamaResp allKeterangan=1;
+}
+
+service KaryawanService{
+    rpc AddKaryawan(AddKaryawanReq) returns (google.protobuf.Empty) {};
+    rpc ReadKaryawanByTelepon(ReadKaryawanByTeleponReq) returns (ReadKaryawanByTeleponResp) {};
+    rpc ReadKaryawan(google.protobuf.Empty) returns (ReadKaryawanResp){};
+    rpc UpdateKaryawan(UpdateKaryawanReq) returns (google.protobuf.Empty){};
+    rpc ReadKaryawanByNama(ReadKaryawanByNamaReq) returns (ReadKaryawanByNamaResp){};
+    rpc ReadKaryawanByKeterangan(ReadKaryawanByKeteranganReq) returns (ReadKaryawanByKeteranganResp){};
+}

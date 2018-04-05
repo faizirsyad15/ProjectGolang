@@ -1,0 +1,51 @@
+syntax="proto3";
+
+import "google/protobuf/empty.proto"; //digunakan jika tdk menggunakan parameter
+
+package grpc;
+
+message AddAlamatReq{
+    string idAlamat=1;
+    string alamatRumah=2;
+    string rtRw=3;
+    string noRumah=4;
+    string idKota=5;
+    string idNegara=6;
+    string status=7;
+}
+
+message ReadAlamatByNoRumahReq{
+    string noRumah=1;
+}
+
+message ReadAlamatByNoRumahResp{
+    string idAlamat=1;
+    string alamatRumah=2;
+    string rtRw=3;
+    string noRumah=4;
+    string idKota=5;
+    string idNegara=6;
+    string status=7;
+}
+
+
+message ReadAlamatResp{
+    repeated ReadAlamatByNoRumahResp allAlamat=1;
+}
+
+message UpdateAlamatReq{
+    string idAlamat=1;
+    string alamatRumah=2;
+    string rtRw=3;
+    string noRumah=4;
+    string idKota=5;
+    string idNegara=6;
+    string status=7;
+}
+
+service AlamatService{
+    rpc AddAlamat(AddAlamatReq) returns (google.protobuf.Empty) {};
+    rpc ReadAlamatByNoRumah(ReadAlamatByNoRumahReq) returns (ReadAlamatByNoRumahResp) {};
+    rpc ReadAlamat(google.protobuf.Empty) returns (ReadAlamatResp){};
+    rpc UpdateAlamat(UpdateAlamatReq) returns (google.protobuf.Empty){};
+}

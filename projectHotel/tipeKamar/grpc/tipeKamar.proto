@@ -1,0 +1,54 @@
+syntax="proto3";
+
+import "google/protobuf/empty.proto"; //digunakan jika tdk menggunakan parameter
+
+package grpc;
+
+message AddTipeKamarReq{
+    string idTipeKamar=1;
+    string namaTipeKamar=2;
+    int32 hargaKamar=3;
+    string status=4;
+}
+
+message ReadTipeKamarByHargaReq{
+    int32 hargaKamar=1;
+}
+
+message ReadTipeKamarByHargaResp{
+    string idTipeKamar=1;
+    string namaTipeKamar=2;
+    int32 hargaKamar=3;
+    string status=4;
+}
+
+
+message ReadTipeKamarResp{
+    repeated ReadTipeKamarByHargaResp allTipeKamar=1;
+}
+
+message UpdateTipeKamarReq{
+    string idTipeKamar=1;
+    string namaTipeKamar=2;
+    int32 hargaKamar=3;
+    string status=4;
+}
+
+message ReadTipeKamarByNamaReq{
+    string namaTipeKamar=1;
+}
+
+message ReadTipeKamarByNamaResp{
+    string idTipeKamar=1;
+    string namaTipeKamar=2;
+    int32 hargaKamar=3;
+    string status=4;
+}
+
+service TipeKamarService{
+    rpc AddTipeKamar(AddTipeKamarReq) returns (google.protobuf.Empty) {};
+    rpc ReadTipeKamarByHarga(ReadTipeKamarByHargaReq) returns (ReadTipeKamarByHargaResp) {};
+    rpc ReadTipeKamar(google.protobuf.Empty) returns (ReadTipeKamarResp){};
+    rpc UpdateTipeKamar(UpdateTipeKamarReq) returns (google.protobuf.Empty){};
+    rpc ReadTipeKamarByNama(ReadTipeKamarByNamaReq) returns (ReadTipeKamarByNamaResp){};
+}

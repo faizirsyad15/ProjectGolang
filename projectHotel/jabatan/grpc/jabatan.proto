@@ -1,0 +1,39 @@
+syntax="proto3";
+
+import "google/protobuf/empty.proto"; //digunakan jika tdk menggunakan parameter
+
+package grpc;
+
+message AddJabatanReq{
+    string idJabatan=1;
+    string namaJabatan=2;
+    string status=3;
+}
+
+message ReadJabatanByNamaReq{
+    string namaJabatan=1;
+}
+
+message ReadJabatanByNamaResp{
+    string idJabatan=1;
+    string namaJabatan=2;
+    string status=3;
+}
+
+
+message ReadJabatanResp{
+    repeated ReadJabatanByNamaResp allJabatan=1;
+}
+
+message UpdateJabatanReq{
+    string idJabatan=1;
+    string namaJabatan=2;
+    string status=3;
+}
+
+service JabatanService{
+    rpc AddJabatan(AddJabatanReq) returns (google.protobuf.Empty) {};
+    rpc ReadJabatan(google.protobuf.Empty) returns (ReadJabatanResp){};
+    rpc UpdateJabatan(UpdateJabatanReq) returns (google.protobuf.Empty){};
+    rpc ReadJabatanByNama(ReadJabatanByNamaReq) returns (ReadJabatanByNamaResp){};
+}

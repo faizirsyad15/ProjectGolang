@@ -1,0 +1,62 @@
+syntax="proto3";
+
+import "google/protobuf/empty.proto"; //digunakan jika tdk menggunakan parameter
+
+package grpc;
+
+message AddTamuReq{
+    string idTamu=1;
+    string namaTamu=2;
+    string noTelepon=3;
+    string jenisKelamin=4;
+    string idAlamat=5;
+    string status=6;
+}
+
+message ReadTamuByTeleponReq{
+    string noTelepon=1;
+}
+
+message ReadTamuByTeleponResp{
+    string idTamu=1;
+    string namaTamu=2;
+    string noTelepon=3;
+    string jenisKelamin=4;
+    string idAlamat=5;
+    string status=6;
+}
+
+
+message ReadTamuResp{
+    repeated ReadTamuByTeleponResp allTamu=1;
+}
+
+message UpdateTamuReq{
+    string idTamu=1;
+    string namaTamu=2;
+    string noTelepon=3;
+    string jenisKelamin=4;
+    string idAlamat=5;
+    string status=6;
+}
+
+message ReadTamuByNamaReq{
+    string namaTamu=1;
+}
+
+message ReadTamuByNamaResp{
+    string idTamu=1;
+    string namaTamu=2;
+    string noTelepon=3;
+    string jenisKelamin=4;
+    string idAlamat=5;
+    string status=6;
+}
+
+service TamuService{
+    rpc AddTamu(AddTamuReq) returns (google.protobuf.Empty) {};
+    rpc ReadTamuByTelepon(ReadTamuByTeleponReq) returns (ReadTamuByTeleponResp) {};
+    rpc ReadTamu(google.protobuf.Empty) returns (ReadTamuResp){};
+    rpc UpdateTamu(UpdateTamuReq) returns (google.protobuf.Empty){};
+    rpc ReadTamuByNama(ReadTamuByNamaReq) returns (ReadTamuByNamaResp){};
+}

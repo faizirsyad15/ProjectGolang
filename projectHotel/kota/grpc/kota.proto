@@ -1,0 +1,39 @@
+syntax="proto3";
+
+import "google/protobuf/empty.proto"; //digunakan jika tdk menggunakan parameter
+
+package grpc;
+
+message AddKotaReq{
+    string idKota=1;
+    string namaKota=2;
+    string status=3;
+}
+
+message ReadKotaByNamaReq{
+    string namaKota=1;
+}
+
+message ReadKotaByNamaResp{
+    string idKota=1;
+    string namaKota=2;
+    string status=3;
+}
+
+
+message ReadKotaResp{
+    repeated ReadKotaByNamaResp allKota=1;
+}
+
+message UpdateKotaReq{
+    string idKota=1;
+    string namaKota=2;
+    string status=3;
+}
+
+service KotaService{
+    rpc AddKota(AddKotaReq) returns (google.protobuf.Empty) {};
+    rpc ReadKota(google.protobuf.Empty) returns (ReadKotaResp){};
+    rpc UpdateKota(UpdateKotaReq) returns (google.protobuf.Empty){};
+    rpc ReadKotaByNama(ReadKotaByNamaReq) returns (ReadKotaByNamaResp){};
+}

@@ -1,0 +1,39 @@
+syntax="proto3";
+
+import "google/protobuf/empty.proto"; //digunakan jika tdk menggunakan parameter
+
+package grpc;
+
+message AddNegaraReq{
+    string idNegara=1;
+    string namaNegara=2;
+    string status=3;
+}
+
+message ReadNegaraByNamaReq{
+    string namaNegara=1;
+}
+
+message ReadNegaraByNamaResp{
+    string idNegara=1;
+    string namaNegara=2;
+    string status=3;
+}
+
+
+message ReadNegaraResp{
+    repeated ReadNegaraByNamaResp allNegara=1;
+}
+
+message UpdateNegaraReq{
+    string idNegara=1;
+    string namaNegara=2;
+    string status=3;
+}
+
+service NegaraService{
+    rpc AddNegara(AddNegaraReq) returns (google.protobuf.Empty) {};
+    rpc ReadNegara(google.protobuf.Empty) returns (ReadNegaraResp){};
+    rpc UpdateNegara(UpdateNegaraReq) returns (google.protobuf.Empty){};
+    rpc ReadNegaraByNama(ReadNegaraByNamaReq) returns (ReadNegaraByNamaResp){};
+}

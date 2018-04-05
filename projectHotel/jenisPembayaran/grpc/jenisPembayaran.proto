@@ -1,0 +1,39 @@
+syntax="proto3";
+
+import "google/protobuf/empty.proto"; //digunakan jika tdk menggunakan parameter
+
+package grpc;
+
+message AddJenisPembayaranReq{
+    string idJenisPembayaran=1;
+    string metodePembayaran=2;
+    string status=3;
+}
+
+message ReadJenisPembayaranByMetodeReq{
+    string metodePembayaran=1;
+}
+
+message ReadJenisPembayaranByMetodeResp{
+    string idJenisPembayaran=1;
+    string metodePembayaran=2;
+    string status=3;
+}
+
+
+message ReadJenisPembayaranResp{
+    repeated ReadJenisPembayaranByMetodeResp allJenisPembayaran=1;
+}
+
+message UpdateJenisPembayaranReq{
+    string idJenisPembayaran=1;
+    string metodePembayaran=2;
+    string status=3;
+}
+
+service JenisPembayaranService{
+    rpc AddJenisPembayaran(AddJenisPembayaranReq) returns (google.protobuf.Empty) {};
+    rpc ReadJenisPembayaran(google.protobuf.Empty) returns (ReadJenisPembayaranResp){};
+    rpc UpdateJenisPembayaran(UpdateJenisPembayaranReq) returns (google.protobuf.Empty){};
+    rpc ReadJenisPembayaranByMetode(ReadJenisPembayaranByMetodeReq) returns (ReadJenisPembayaranByMetodeResp){};
+}
